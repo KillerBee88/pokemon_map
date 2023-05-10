@@ -2,7 +2,7 @@ from django.db import models  # noqa F401
 
 class Pokemon(models.Model):
     title = models.CharField(max_length=200)
-    photo = models.ImageField(null=True)
+    image = models.ImageField(blank=True, null=True, upload_to='media')
     
     def __str__(self):
         return '{}'.format(self.title)
@@ -15,8 +15,8 @@ class PokemonEntity(models.Model):
     )
     latitude = models.FloatField()
     longitude = models.FloatField()
-    appeared_at = models.DateTimeField(null=True)
-    disappeared_at = models.DateTimeField(null=True)
+    appeared_at = models.DateTimeField(null=True, blank=True)
+    disappeared_at = models.DateTimeField(null=True, blank=True)
     level = models.IntegerField(default=0)
     health = models.IntegerField(default=0)
     attack = models.IntegerField(default=0)
