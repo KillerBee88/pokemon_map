@@ -16,7 +16,7 @@ class Pokemon(models.Model):
     )
     
     def __str__(self):
-        return '{}'.format(self.title)
+        return self.title
 
 class PokemonEntity(models.Model):
     pokemon = models.ForeignKey(
