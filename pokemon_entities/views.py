@@ -77,6 +77,7 @@ def show_pokemon(request, pokemon_id):
         'pokemon_id': requested_pokemon.id,
         'img_url': request.build_absolute_uri(requested_pokemon.image.url) if requested_pokemon.image else DEFAULT_IMAGE_URL,
         'title_ru': requested_pokemon.title,
+        'description': requested_pokemon.description,
     }
 
     return render(request, 'pokemon.html', context={
