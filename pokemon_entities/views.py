@@ -73,6 +73,24 @@ def show_pokemon(request, pokemon_id):
             request.build_absolute_uri(pokemon_entity.pokemon.image.url) if pokemon_entity.pokemon.image else DEFAULT_IMAGE_URL
         )
 
+    evolution_from = None
+    if requested_pokemon.evolution_from:
+        evolution_from = {
+            "title_ru": requested_pokemon.evolution_from.title,
+            "pokemon_id": requested_pokemon.evolution_from.id,
+            "img_url": request.build_absolute_uri(requested_pokemon.evolution_from.image.url) if requested_pokemon.evolution_from.image else DEFAULT_IMAGE_URL,
+        }
+
+    next_evolution = None
+    next_evolution_objs = requested_pokemon.evolutions.all()
+    if next_evolution_objs:
+        next_evolution_obj = next_evolution_objs[0]
+        next_evolution = {
+            "title_ru": next_evolution_obj.title,
+            "pokemon_id": next_evolution_obj.id,
+            "img_url": request.build_absolute_uri(next_evolution_obj.image.url) if next_evolution_obj.image else DEFAULT_IMAGE_URL,
+        }
+
     pokemon = {
         'pokemon_id': requested_pokemon.id,
         'img_url': request.build_absolute_uri(requested_pokemon.image.url) if requested_pokemon.image else DEFAULT_IMAGE_URL,
@@ -80,6 +98,8 @@ def show_pokemon(request, pokemon_id):
         'title_en': requested_pokemon.title_en,
         'title_jp': requested_pokemon.title_jp,
         'description': requested_pokemon.description,
+        'previous_evolution': evolution_from,
+        'next_evolution': next_evolution,
     }
 
     return render(request, 'pokemon.html', context={
