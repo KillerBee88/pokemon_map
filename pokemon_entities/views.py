@@ -83,15 +83,14 @@ def show_pokemon(request, pokemon_id):
             "img_url": get_image_url(request, requested_pokemon.previous_evolution.image),
             }
 
-    next_evolution_obj = requested_pokemon.next_evolution.first()
-    if next_evolution_obj:
+    next_evolution = requested_pokemon.next_evolution.first()
+    if next_evolution:
         next_evolution = {
-            "title_ru": next_evolution_obj.title,
-            "pokemon_id": next_evolution_obj.id,
-            "img_url": get_image_url(request, next_evolution_obj.image),
+            "title_ru": next_evolution.title,
+            "pokemon_id": next_evolution.id,
+            "img_url": get_image_url(request, next_evolution.image),
             }
-    else:
-        next_evolution = None
+
 
     pokemon = {
         'pokemon_id': requested_pokemon.id,
