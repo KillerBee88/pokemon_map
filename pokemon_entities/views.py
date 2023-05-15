@@ -83,7 +83,7 @@ def show_pokemon(request, pokemon_id):
             "img_url": get_image_url(request, requested_pokemon.previous_evolution.image),
             }
 
-    next_evolution_obj = requested_pokemon.evolved_from.first()
+    next_evolution_obj = requested_pokemon.next_evolution.first()
     if next_evolution_obj:
         next_evolution = {
             "title_ru": next_evolution_obj.title,
