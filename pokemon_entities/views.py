@@ -72,7 +72,7 @@ def show_pokemon(request, pokemon_id):
         add_pokemon(
             folium_map, pokemon_entity.latitude,
             pokemon_entity.longitude,
-            request.build_absolute_uri(pokemon_entity.pokemon.image.url) if pokemon_entity.pokemon.image else DEFAULT_IMAGE_URL
+            get_image_url(request, pokemon_entity.pokemon.image)
         )
 
     previous_evolution = None
